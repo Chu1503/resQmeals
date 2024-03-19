@@ -1,0 +1,7 @@
+#particles {
+    z-index: -100;
+    height: screen;
+    width: screen;
+    position: absolute;
+    overflow: hidden;
+}
