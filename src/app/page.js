@@ -38,12 +38,16 @@ export default function Home() {
         <>
           <ParticlesComponent
             id="particles"
-            className="z-negative-one h-full w-full absolute inset-0"
           />
           <h1 className="text-white text-3xl sm:text-5xl font-bold p-5">
             ResQMeals
           </h1>
-          <button onClick={signInWithGoogle}>SIGN IN</button>
+          <button
+            onClick={signInWithGoogle}
+            className="border-[2px] rounded-full p-3 font-black tracking-[5px] text-yellow-400 border-yellow-400 bg-black hover:bg-yellow-400 hover:text-black"
+          >
+            SIGN IN
+          </button>
         </>
       )}
     </div>
