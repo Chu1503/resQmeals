@@ -6,6 +6,7 @@ import Homepage from "./homepage/page";
 import SelectPage from "@/components/select";
 import ParticlesComponent from "@/components/particles/particles";
 import "@/components//particles/particles.css";
+import BuyerRegister from "./firebase/buyerRegister/buyerRegister";
 
 export default function Home() {
   const [user, setUser] = useState(null);
