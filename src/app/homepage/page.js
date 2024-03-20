@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/config";
@@ -10,14 +10,43 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [foodName, setFoodName] = useState("");
   const [itemQuantity, setItemQuantity] = useState("");
 
+  const handleRegister = async () => {
+    try {
+      const storedDataString = localStorage.getItem("buyerData");
+      if (storedDataString) {
+        const storedData = JSON.parse(storedDataString); // Parse the JSON string
+        const response = await axios.post(
+          "https://res-qmeals-backend.vercel.app/api/postPost",
+          {
+            restaurant_id: storedData,
+            food_name: foodName,
+            item_quantity: itemQuantity,
+            claimer: null,
+            status: false,
+          }
+        );
+        const responseData = response.data; // No need to parse since it's already JSON
+        const extractedRestaurantId = responseData.restaurant_id; // Extract restaurant ID
+        console.log("Response Data:", extractedRestaurantId); // Log the extracted restaurant ID
+      }
+      // Now you can pass the extracted restaurant ID to other functions or use it as needed
+    } catch (error) {
+      console.error("Error posting food information:", error);
+    }
+  };
+
   const handlePost = () => {
     onSubmit({ foodName, itemQuantity });
+    handleRegister();
     onClose();
   };
 
   return (
     <div className={`fixed inset-0 z-50 ${isOpen ? "block" : "hidden"}`}>
-      <div className="absolute inset-0 bg-black opacity-50" onClick={onClose}></div>
+      <div
+        className="absolute inset-0 bg-black opacity-50"
+        onClick={onClose}
+      ></div>
       <div className="flex flex-col modal-content bg-[#212121] p-5 rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <h1 className="text-[#F7D098] text-4xl mb-5">Create Post</h1>
         <input
@@ -49,6 +78,7 @@ const Homepage = () => {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [fetchedPosts, setFetchedPosts] = useState([]);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -58,6 +88,17 @@ const Homepage = () => {
         setUser(null);
       }
     });
+
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get("https://res-qmeals-backend.vercel.app/api/getPosts");
+        setFetchedPosts(response.data); // Assuming the response data is an array of posts
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   const logOut = async () => {
@@ -78,7 +119,7 @@ const Homepage = () => {
   };
 
   const handleSubmitPost = (content) => {
-    setPosts([...posts, content]); // Add new post to the array of posts
+    setPosts([...posts, content]);
   };
 
   return (
@@ -94,12 +135,16 @@ const Homepage = () => {
         </button>
       </div>
       <div className="flex flex-wrap justify-center">
-        {posts.map((post, index) => (
+        {[...posts, ...fetchedPosts].map((post, index) => (
           <div key={index} className="flex items-center justify-center m-4">
             <div className="flex flex-col items-center p-10 rounded-3xl shadow-xl sm:w-[15vw] sm:h-[25vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl">
               <h1 className="text-white text-3xl font-bold p-15">R. Name</h1>
-              <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-8">Food Item : {post.foodName}</h1>
-              <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-1">Quantity : {post.itemQuantity}</h1>
+              <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-8">
+                Food Item : {post.foodName}
+              </h1>
+              <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-1">
+                Quantity : {post.itemQuantity}
+              </h1>
             </div>
           </div>
         ))}
