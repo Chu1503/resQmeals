@@ -9,34 +9,15 @@ import axios from "axios";
 const Modal = ({ isOpen, onClose, onSubmit }) => {
   const [foodName, setFoodName] = useState("");
   const [itemQuantity, setItemQuantity] = useState("");
-  const [restaurantIdSession, setRestaurantIdSession] = useState(null);
-
-  const handleRegister = async () => {
-    try {
-      const response = await axios.post("http://127.0.0.1:8080/api/postPost", {
-        restaurant_id: "tara_maa_1710955091522",
-        food_name: foodName,
-        item_quantity: itemQuantity,
-        claimer: null,
-        status: false,
-      });
-
-      setRestaurantIdSession(response.data);
-      console.log("Response Data:", response.data);
-    } catch (error) {
-      console.error("Error posting food information:", error);
-    }
-  };
 
   const handlePost = () => {
-    handleRegister();
     onSubmit({ foodName, itemQuantity });
     onClose();
   };
 
   return (
     <div className={`fixed inset-0 z-50 ${isOpen ? "block" : "hidden"}`}>
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-50" onClick={onClose}></div>
       <div className="flex flex-col modal-content bg-[#212121] p-5 rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <h1 className="text-[#F7D098] text-4xl mb-5">Create Post</h1>
         <input
@@ -67,7 +48,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
 const Homepage = () => {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [submittedContent, setSubmittedContent] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -97,8 +78,7 @@ const Homepage = () => {
   };
 
   const handleSubmitPost = (content) => {
-    console.log("Submitted post content:", content);
-    setSubmittedContent(content);
+    setPosts([...posts, content]); // Add new post to the array of posts
   };
 
   return (
@@ -113,20 +93,23 @@ const Homepage = () => {
           LOG OUT
         </button>
       </div>
+      <div className="flex flex-wrap justify-center">
+        {posts.map((post, index) => (
+          <div key={index} className="flex items-center justify-center m-4">
+            <div className="flex flex-col items-center p-10 rounded-3xl shadow-xl sm:w-[15vw] sm:h-[25vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl">
+              <h1 className="text-white text-3xl font-bold p-15">R. Name</h1>
+              <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-8">Food Item : {post.foodName}</h1>
+              <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-1">Quantity : {post.itemQuantity}</h1>
+            </div>
+          </div>
+        ))}
+      </div>
       <button
         className="bg-[#F7D098] hover:bg-white text-[#212121] font-bold text-md rounded-md p-3 absolute bottom-[10vh]"
         onClick={handleModalOpen}
       >
         CREATE POST
       </button>
-      {submittedContent && (
-        <div className="fixed inset-0 flex items-center justify-center">
-          <div className="bg-[#333333] p-4 rounded-lg">
-            <p>Food Item: {submittedContent.foodName}</p>
-            <p>Item Quantity: {submittedContent.itemQuantity}</p>
-          </div>
-        </div>
-      )}
       <Modal
         isOpen={isModalOpen}
         onClose={handleModalClose}
