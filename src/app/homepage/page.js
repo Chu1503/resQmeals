@@ -1,28 +1,28 @@
-"use client";
+"use client"
 import React, { useState, useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { Icon } from "@chakra-ui/react";
 import { FiLogOut } from "react-icons/fi";
-import axios from 'axios';
+import axios from "axios";
 
-const Modal = ({ isOpen, onClose }) => {
-  const [foodName, setFoodName] = useState('');
-  const [itemQuantity, setItemQuantity] = useState('');
+const Modal = ({ isOpen, onClose, onSubmit }) => {
+  const [foodName, setFoodName] = useState("");
+  const [itemQuantity, setItemQuantity] = useState("");
+  const [restaurantIdSession, setRestaurantIdSession] = useState(null);
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post(
-        "https://res-qmeals-backend.vercel.app/api/postPost",
-        {
-          restaurant_id: "mud_cups_1710950417023",
-          food_name: foodName,
-          item_quantity: itemQuantity,
-          claimer: null,
-          status: false
-        }
-      );
-      console.log(response.data);
+      const response = await axios.post("http://127.0.0.1:8080/api/postPost", {
+        restaurant_id: "tara_maa_1710955091522",
+        food_name: foodName,
+        item_quantity: itemQuantity,
+        claimer: null,
+        status: false,
+      });
+
+      setRestaurantIdSession(response.data);
+      console.log("Response Data:", response.data);
     } catch (error) {
       console.error("Error posting food information:", error);
     }
@@ -30,6 +30,7 @@ const Modal = ({ isOpen, onClose }) => {
 
   const handlePost = () => {
     handleRegister();
+    onSubmit({ foodName, itemQuantity });
     onClose();
   };
 
@@ -66,9 +67,9 @@ const Modal = ({ isOpen, onClose }) => {
 const Homepage = () => {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [submittedContent, setSubmittedContent] = useState(null);
 
   useEffect(() => {
-    // Use useEffect here
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
@@ -97,13 +98,13 @@ const Homepage = () => {
 
   const handleSubmitPost = (content) => {
     console.log("Submitted post content:", content);
-    // You can add logic here to handle the submission of the post content
+    setSubmittedContent(content);
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center text-center overflow-hidden">
-      <div className="absolute top-0 w-screen h-[10vh] flex flex-row items-center justify-around bg-gray-900">
-        <h1 className="text-white text-3xl font-bold p-5">resQmeals</h1>
+    <div className="h-screen w-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#212121]">
+      <div className="absolute top-0 w-screen h-[10vh] flex flex-row items-center justify-around bg-black">
+        <h1 className="text-[#F7D098] text-3xl font-bold p-5">resQmeals</h1>
         <button
           onClick={logOut}
           className="px-4 py-2 bg-transparent border-1 border-[#00D094] text-[#FF0000] text-lg rounded-md flex items-center"
@@ -118,6 +119,14 @@ const Homepage = () => {
       >
         CREATE POST
       </button>
+      {submittedContent && (
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="bg-[#333333] p-4 rounded-lg">
+            <p>Food Item: {submittedContent.foodName}</p>
+            <p>Item Quantity: {submittedContent.itemQuantity}</p>
+          </div>
+        </div>
+      )}
       <Modal
         isOpen={isModalOpen}
         onClose={handleModalClose}
