@@ -9,7 +9,7 @@ import "@/components//particles/particles.css";
 
 export default function Home() {
   const [user, setUser] = useState(null);
-  
+  const [loading, setLoading] = useState(true); // State variable for loading indicator
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -18,6 +18,7 @@ export default function Home() {
       } else {
         setUser(null);
       }
+      setLoading(false); // Set loading to false once auth state is determined
     });
 
     return () => unsubscribe(); // Cleanup function to avoid memory leaks
@@ -34,7 +35,9 @@ export default function Home() {
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
-      {user ? (
+      {loading ? ( // Display loading text while awaiting authentication
+        <p className="text-white text-3xl sm:text-5xl font-bold p-5 tracking-widest">Loading...</p>
+      ) : user ? (
         <SelectPage />
       ) : (
         <>
