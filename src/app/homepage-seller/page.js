@@ -40,6 +40,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     onSubmit({ foodName, itemQuantity });
     handleRegister();
     onClose();
+    window.location.reload();
   };
 
   return (
@@ -82,6 +83,17 @@ const Homepage = () => {
   const router = useRouter();
 
   useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          "https://res-qmeals-backend.vercel.app/api/fetchRestaurants"
+        );
+        setPosts(response.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
@@ -89,14 +101,16 @@ const Homepage = () => {
         setUser(null);
       }
     });
-  }, []); // Empty dependency array means this effect runs only once, similar to componentDidMount
+
+    fetchPosts();
+  }, []);
 
   const logOut = async () => {
     try {
       await signOut(auth);
       console.log("User logged out successfully.");
       setUser(null);
-      router.push("/")
+      router.push("/");
     } catch (error) {
       console.error("Error logging out:", error.message);
     }
@@ -127,17 +141,18 @@ const Homepage = () => {
         </button>
       </div>
       <div className="flex flex-wrap justify-center">
-        {[...posts].map((post, index) => (
+        {posts.map((post, index) => (
           <div key={index} className="flex items-center justify-center m-4">
             <div className="flex flex-col items-center p-10 rounded-3xl sm:w-[15vw] sm:h-[25vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl">
               <h1 className="text-white text-3xl font-bold p-15">
-                {localStorage.getItem("buyerData").substring(1).split("_")[0]}
+                {post.restaurant_name?.replace(/["0-9_]/g, "")}
               </h1>
+
               <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-8">
-                Food Item : {post.foodName}
+                Food Item : {post.food_type}
               </h1>
               <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-1">
-                Quantity : {post.itemQuantity}
+                Quantity : {post.quantity}
               </h1>
             </div>
           </div>
