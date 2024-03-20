@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Marquee from "react-fast-marquee";
+import { useRouter } from "next/navigation";
 
 const SellerRegister = () => {
   const [name, setName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
+  const router = useRouter();
 
   const handleRegister = async () => {
     try {
@@ -19,9 +21,15 @@ const SellerRegister = () => {
         }
       );
       console.log(response.data);
+
+      router.push("/homepage");
     } catch (error) {
-      console.error("Error posting restaurant:", error);
+      console.error("Error posting buyer information:", error);
     }
+  };
+
+  const handleSubmit = () => {
+    handleRegister();
   };
 
   return (
@@ -136,7 +144,7 @@ const SellerRegister = () => {
             className="w-[75vw] sm:w-full h-[20vh] p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white resize-none"
           />
           <button
-            onClick={handleRegister}
+            onClick={handleSubmit}
             className="w-auto mt-4 p-4 rounded-xl font-black bg-[#F7D098] text-[#212121] hover:bg-white"
           >
             Submit
