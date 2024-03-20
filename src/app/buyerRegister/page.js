@@ -126,17 +126,23 @@ const BuyerRegister = () => {
           <input
             type="text"
             placeholder="Name"
-            value={buyer_name} // Bind value to state
-            onChange={(e) => setBuyerName(e.target.value)} // Update state on change
+            value={buyer_name}
+            onChange={(e) => setBuyerName(e.target.value)}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
           />
           <input
             type="text"
             placeholder="Contact Number"
-            value={buyer_contact_number} // Bind value to state
-            onChange={(e) => setBuyerContactNumber(e.target.value)} // Update state on change
+            value={buyer_contact_number} 
+            onChange={(e) => {
+              const input = e.target.value;
+              const numericInput = input.replace(/\D/g, "");
+              const trimmedInput = numericInput.slice(0, 10);
+              setBuyerContactNumber(trimmedInput);
+            }}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
           />
+
           <textarea
             placeholder="Address"
             value={buyer_address} // Bind value to state

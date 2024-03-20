@@ -23,7 +23,7 @@ const SellerRegister = () => {
       console.log(response.data);
 
       localStorage.setItem("buyerData", JSON.stringify(response.data));
-        console.log("Hi")
+      console.log("Hi");
       router.push("/homepage");
     } catch (error) {
       console.error("Error posting buyer information:", error);
@@ -135,14 +135,19 @@ const SellerRegister = () => {
           <input
             type="text"
             placeholder="Contact Number"
-            value={contactNumber} // Bind value to state
-            onChange={(e) => setContactNumber(e.target.value)} // Update state on change
+            value={contactNumber}
+            onChange={(e) => {
+              const input = e.target.value;
+              const numericInput = input.replace(/\D/g, "");
+              const trimmedInput = numericInput.slice(0, 10);
+              setContactNumber(trimmedInput);
+            }}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
           />
           <textarea
             placeholder="Address"
-            value={address} // Bind value to state
-            onChange={(e) => setAddress(e.target.value)} // Update state on change
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             className="w-[75vw] sm:w-full h-[20vh] p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white resize-none"
           />
           <button
