@@ -125,7 +125,7 @@ const Homepage = () => {
       <div className="flex flex-wrap justify-center">
         {[...posts].map((post, index) => (
           <div key={index} className="flex items-center justify-center m-4">
-            <div className="flex flex-col items-center p-10 rounded-3xl shadow-xl sm:w-[15vw] sm:h-[25vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl">
+            <div className="flex flex-col items-center p-10 rounded-3xl sm:w-[15vw] sm:h-[25vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl">
               <h1 className="text-white text-3xl font-bold p-15">{localStorage.getItem("buyerData").substring(1).split('_')[0]}</h1>
               <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-8">
                 Food Item : {post.foodName}

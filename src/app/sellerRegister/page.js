@@ -23,16 +23,20 @@ const SellerRegister = () => {
       console.log(response.data);
 
       localStorage.setItem("buyerData", JSON.stringify(response.data));
-      console.log("Hi");
-      router.push("/homepage");
+      router.push("/homepage-seller");
     } catch (error) {
       console.error("Error posting buyer information:", error);
     }
   };
 
   const handleSubmit = () => {
-    handleRegister();
+    if (name.trim() !== '' && contactNumber.trim() !== '' && address.trim() !== '') {
+      handleRegister();
+    } else {
+      alert('Please fill in all fields.');
+    }
   };
+  
 
   return (
     <>
@@ -131,6 +135,7 @@ const SellerRegister = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required 
           />
           <input
             type="text"
@@ -143,12 +148,14 @@ const SellerRegister = () => {
               setContactNumber(trimmedInput);
             }}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required 
           />
           <textarea
             placeholder="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             className="w-[75vw] sm:w-full h-[20vh] p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white resize-none"
+            required 
           />
           <button
             onClick={handleSubmit}

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "./firebase/config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import Homepage from "./homepage/page";
+import Homepage from "./homepage-seller/page";
 import SelectPage from "@/app/select/select";
 import ParticlesComponent from "@/components/particles/particles";
 import "@/components//particles/particles.css";

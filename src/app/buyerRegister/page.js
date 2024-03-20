@@ -22,15 +22,20 @@ const BuyerRegister = () => {
       );
       console.log(response.data);
 
-      router.push("/homepage");
+      router.push("/homepage-buyer");
     } catch (error) {
       console.error("Error posting buyer information:", error);
     }
   };
 
   const handleSubmit = () => {
-    handleRegister();
+    if (buyer_name.trim() !== '' && buyer_contact_number.trim() !== '' && buyer_address.trim() !== '') {
+      handleRegister();
+    } else {
+      alert('Please fill in all fields.');
+    }
   };
+  
 
   return (
     <>
@@ -129,6 +134,7 @@ const BuyerRegister = () => {
             value={buyer_name}
             onChange={(e) => setBuyerName(e.target.value)}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required
           />
           <input
             type="text"
@@ -141,6 +147,7 @@ const BuyerRegister = () => {
               setBuyerContactNumber(trimmedInput);
             }}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required
           />
 
           <textarea
@@ -148,6 +155,7 @@ const BuyerRegister = () => {
             value={buyer_address} // Bind value to state
             onChange={(e) => setBuyerAddress(e.target.value)} // Update state on change
             className="w-[75vw] sm:w-full h-[20vh] p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white resize-none"
+            required
           />
           <button
             onClick={handleSubmit}
