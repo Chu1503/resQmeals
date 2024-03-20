@@ -40,7 +40,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     onSubmit({ foodName, itemQuantity });
     handleRegister();
     onClose();
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
