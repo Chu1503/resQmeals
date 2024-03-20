@@ -8,10 +8,12 @@ const BuyerRegister = () => {
   const [buyer_name, setBuyerName] = useState("");
   const [buyer_contact_number, setBuyerContactNumber] = useState("");
   const [buyer_address, setBuyerAddress] = useState("");
+  const [loading, setLoading] = useState(false); 
   const router = useRouter();
 
   const handleRegister = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://res-qmeals-backend.vercel.app/api/postBuyer",
         {
@@ -22,15 +24,22 @@ const BuyerRegister = () => {
       );
       console.log(response.data);
 
-      router.push("/homepage");
+      router.push("/homepage-buyer");
     } catch (error) {
       console.error("Error posting buyer information:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
   const handleSubmit = () => {
-    handleRegister();
+    if (buyer_name.trim() !== '' && buyer_contact_number.trim() !== '' && buyer_address.trim() !== '') {
+      handleRegister();
+    } else {
+      alert('Please fill in all fields.');
+    }
   };
+  
 
   return (
     <>
@@ -126,29 +135,42 @@ const BuyerRegister = () => {
           <input
             type="text"
             placeholder="Name"
-            value={buyer_name} // Bind value to state
-            onChange={(e) => setBuyerName(e.target.value)} // Update state on change
+            value={buyer_name}
+            onChange={(e) => setBuyerName(e.target.value)}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required
           />
           <input
             type="text"
             placeholder="Contact Number"
-            value={buyer_contact_number} // Bind value to state
-            onChange={(e) => setBuyerContactNumber(e.target.value)} // Update state on change
+            value={buyer_contact_number} 
+            onChange={(e) => {
+              const input = e.target.value;
+              const numericInput = input.replace(/\D/g, "");
+              const trimmedInput = numericInput.slice(0, 10);
+              setBuyerContactNumber(trimmedInput);
+            }}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required
           />
+
           <textarea
             placeholder="Address"
             value={buyer_address} // Bind value to state
             onChange={(e) => setBuyerAddress(e.target.value)} // Update state on change
             className="w-[75vw] sm:w-full h-[20vh] p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white resize-none"
+            required
           />
+          {loading ? (
+            <p className="mt-4 font-black text-white">Loading...</p>
+          ) : (
           <button
             onClick={handleSubmit}
             className="w-auto mt-4 p-4 rounded-xl font-black bg-[#F7D098] text-[#212121] hover:bg-white"
           >
             Submit
           </button>
+          )}
         </div>
       </div>
     </>

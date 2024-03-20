@@ -8,10 +8,12 @@ const SellerRegister = () => {
   const [name, setName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false); 
   const router = useRouter();
 
   const handleRegister = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://res-qmeals-backend.vercel.app/api/postSeller",
         {
@@ -23,15 +25,24 @@ const SellerRegister = () => {
       console.log(response.data);
 
       localStorage.setItem("buyerData", JSON.stringify(response.data));
-        console.log("Hi")
-      router.push("/homepage");
+      router.push("/homepage-seller");
     } catch (error) {
       console.error("Error posting buyer information:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSubmit = () => {
-    handleRegister();
+    if (
+      name.trim() !== "" &&
+      contactNumber.trim() !== "" &&
+      address.trim() !== ""
+    ) {
+      handleRegister();
+    } else {
+      alert("Please fill in all fields.");
+    }
   };
 
   return (
@@ -131,26 +142,38 @@ const SellerRegister = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required
           />
           <input
             type="text"
             placeholder="Contact Number"
-            value={contactNumber} // Bind value to state
-            onChange={(e) => setContactNumber(e.target.value)} // Update state on change
+            value={contactNumber}
+            onChange={(e) => {
+              const input = e.target.value;
+              const numericInput = input.replace(/\D/g, "");
+              const trimmedInput = numericInput.slice(0, 10);
+              setContactNumber(trimmedInput);
+            }}
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
+            required
           />
           <textarea
             placeholder="Address"
-            value={address} // Bind value to state
-            onChange={(e) => setAddress(e.target.value)} // Update state on change
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             className="w-[75vw] sm:w-full h-[20vh] p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white resize-none"
+            required
           />
-          <button
-            onClick={handleSubmit}
-            className="w-auto mt-4 p-4 rounded-xl font-black bg-[#F7D098] text-[#212121] hover:bg-white"
-          >
-            Submit
-          </button>
+          {loading ? (
+            <p className="mt-4 font-black text-white">Loading...</p>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              className="w-auto mt-4 p-4 rounded-xl font-black bg-[#F7D098] text-[#212121] hover:bg-white"
+            >
+              Submit
+            </button>
+          )}
         </div>
       </div>
     </>
