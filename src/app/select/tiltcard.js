@@ -51,8 +51,8 @@ const TiltCard = () => {
         style={{
           transform: "translateZ(500px)",
           transformStyle: "preserve-3d",
-          backdropFilter: "blur(100px)",
-          backgroundColor: "rgba(255, 255, 255, 0.10)",
+          boxShadow: "0 0 20px rgba(255, 255, 255, 1)", // Adding glow effect
+          backgroundColor: "rgb(33, 33, 33)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -64,9 +64,9 @@ const TiltCard = () => {
         }}
         className="relative h-[50vh] w-[50vh] rounded-xl flex flex-row items-center"
       >
-        <div className="flex flex-col items-center">
-          <FaShop size={32} />
-          <h1 className="text-5xl font-bold">Seller</h1>
+        <div className="flex flex-col items-center gap-5">
+          <FaShop size={180} color="#D9D9D9" />
+          <h1 className="text-3xl font-light text-[#D9D9D9]">Seller</h1>
         </div>
       </motion.div>
       <motion.div
@@ -74,8 +74,8 @@ const TiltCard = () => {
         style={{
           transform: "translateZ(500px)",
           transformStyle: "preserve-3d",
-          backdropFilter: "blur(100px)",
-          backgroundColor: "rgba(255, 255, 255, 0.10)",
+          boxShadow: "0 0 20px rgba(255, 255, 255, 1)", // Adding glow effect
+          backgroundColor: "rgb(33, 33, 33)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -86,9 +86,9 @@ const TiltCard = () => {
         }}
         className="relative h-[50vh] w-[50vh] rounded-xl flex flex-row items-center"
       >
-        <div className="flex flex-col items-center">
-          <FaCartShopping size={32} />
-          <h1 className="text-5xl font-bold">Buyer</h1>
+        <div className="flex flex-col items-center gap-5">
+          <FaCartShopping size={180} color="#D9D9D9" />
+          <h1 className="text-3xl font-light text-[#D9D9D9]">Buyer</h1>
         </div>
       </motion.div>
     </div>
