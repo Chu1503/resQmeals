@@ -3,24 +3,24 @@ import React, { useState } from "react";
 import axios from "axios";
 import Marquee from "react-fast-marquee";
 
-const SellerRegister = () => {
-  const [name, setName] = useState("");
-  const [contactNumber, setContactNumber] = useState("");
-  const [address, setAddress] = useState("");
+const BuyerRegister = () => {
+  const [buyer_name, setBuyerName] = useState("");
+  const [buyer_contact_number, setBuyerContactNumber] = useState("");
+  const [buyer_address, setBuyerAddress] = useState("");
 
   const handleRegister = async () => {
     try {
       const response = await axios.post(
-        "https://res-qmeals-backend-7lfm.vercel.app/api/postSeller",
+        "https://res-qmeals-backend-7lfm.vercel.app/api/postBuyer",
         {
-          restaurant_name: name,
-          seller_contact_number: contactNumber, // Pass seller contact number
-          seller_address: address, // Pass seller address
+          buyer_name: buyer_name,
+          buyer_contact_number: buyer_contact_number,
+          buyer_address: buyer_address,
         }
       );
       console.log(response.data);
     } catch (error) {
-      console.error("Error posting restaurant:", error);
+      console.error("Error posting buyer information:", error);
     }
   };
 
@@ -36,8 +36,8 @@ const SellerRegister = () => {
             pauseOnClick
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
-              SELLER.
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+              BUYER.
             </h1>
           </Marquee>
           <Marquee
@@ -48,8 +48,8 @@ const SellerRegister = () => {
             pauseOnClick
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
-              SELLER.
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
+              BUYER.
             </h1>
           </Marquee>
           <Marquee
@@ -60,8 +60,8 @@ const SellerRegister = () => {
             pauseOnClick
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
-              SELLER.
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+              BUYER.
             </h1>
           </Marquee>
           <Marquee
@@ -71,8 +71,8 @@ const SellerRegister = () => {
             pauseOnClick
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
-              SELLER.
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
+              BUYER.
             </h1>
           </Marquee>
           <Marquee
@@ -83,8 +83,8 @@ const SellerRegister = () => {
             pauseOnClick
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
-              SELLER.
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+              BUYER.
             </h1>
           </Marquee>
           <Marquee
@@ -95,8 +95,8 @@ const SellerRegister = () => {
             pauseOnClick
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
-              SELLER.
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
+              BUYER.
             </h1>
           </Marquee>
           <Marquee
@@ -106,8 +106,8 @@ const SellerRegister = () => {
             pauseOnClick
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
-              SELLER.
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+              BUYER.
             </h1>
           </Marquee>
         </div>
@@ -117,22 +117,22 @@ const SellerRegister = () => {
           </h1>
           <input
             type="text"
-            placeholder="Restaurant Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Name"
+            value={buyer_name} // Bind value to state
+            onChange={(e) => setBuyerName(e.target.value)} // Update state on change
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
           />
           <input
             type="text"
             placeholder="Contact Number"
-            value={contactNumber} // Bind value to state
-            onChange={(e) => setContactNumber(e.target.value)} // Update state on change
+            value={buyer_contact_number} // Bind value to state
+            onChange={(e) => setBuyerContactNumber(e.target.value)} // Update state on change
             className="w-[75vw] sm:w-full p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white"
           />
           <textarea
             placeholder="Address"
-            value={address} // Bind value to state
-            onChange={(e) => setAddress(e.target.value)} // Update state on change
+            value={buyer_address} // Bind value to state
+            onChange={(e) => setBuyerAddress(e.target.value)} // Update state on change
             className="w-[75vw] sm:w-full h-[20vh] p-4 mt-4 mb-4 bg-[#676767] rounded-xl outline-none text-white resize-none"
           />
           <button
@@ -147,4 +147,4 @@ const SellerRegister = () => {
   );
 };
 
-export default SellerRegister;
+export default BuyerRegister;

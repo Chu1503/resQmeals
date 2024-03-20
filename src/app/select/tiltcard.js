@@ -70,6 +70,7 @@ const TiltCard = () => {
         </div>
       </motion.div>
       <motion.div
+        onClick={() => router.push("/buyerRegister")}
         style={{
           transform: "translateZ(500px)",
           transformStyle: "preserve-3d",
