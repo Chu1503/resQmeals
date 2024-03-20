@@ -78,7 +78,6 @@ const Homepage = () => {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [fetchedPosts, setFetchedPosts] = useState([]);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -88,18 +87,7 @@ const Homepage = () => {
         setUser(null);
       }
     });
-
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get("https://res-qmeals-backend.vercel.app/api/getPosts");
-        setFetchedPosts(response.data); // Assuming the response data is an array of posts
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+  }, []); // Empty dependency array means this effect runs only once, similar to componentDidMount
 
   const logOut = async () => {
     try {
@@ -135,10 +123,10 @@ const Homepage = () => {
         </button>
       </div>
       <div className="flex flex-wrap justify-center">
-        {[...posts, ...fetchedPosts].map((post, index) => (
+        {[...posts].map((post, index) => (
           <div key={index} className="flex items-center justify-center m-4">
             <div className="flex flex-col items-center p-10 rounded-3xl shadow-xl sm:w-[15vw] sm:h-[25vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl">
-              <h1 className="text-white text-3xl font-bold p-15">R. Name</h1>
+              <h1 className="text-white text-3xl font-bold p-15">{localStorage.getItem("buyerData").substring(1).split('_')[0]}</h1>
               <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-8">
                 Food Item : {post.foodName}
               </h1>
