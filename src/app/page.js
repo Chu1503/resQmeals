@@ -9,6 +9,7 @@ import "@/components//particles/particles.css";
 
 export default function Home() {
   const [user, setUser] = useState(null);
+  
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

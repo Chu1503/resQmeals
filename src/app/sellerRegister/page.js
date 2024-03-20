@@ -13,11 +13,11 @@ const SellerRegister = () => {
   const handleRegister = async () => {
     try {
       const response = await axios.post(
-        "https://res-qmeals-backend-7lfm.vercel.app/api/postSeller",
+        "https://res-qmeals-backend.vercel.app/api/postSeller",
         {
           restaurant_name: name,
-          seller_contact_number: contactNumber, // Pass seller contact number
-          seller_address: address, // Pass seller address
+          seller_contact_number: contactNumber,
+          seller_address: address,
         }
       );
       console.log(response.data);

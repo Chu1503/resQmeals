@@ -13,7 +13,7 @@ const BuyerRegister = () => {
   const handleRegister = async () => {
     try {
       const response = await axios.post(
-        "https://res-qmeals-backend-7lfm.vercel.app/api/postBuyer",
+        "https://res-qmeals-backend.vercel.app/api/postBuyer",
         {
           buyer_name: buyer_name,
           buyer_contact_number: buyer_contact_number,
