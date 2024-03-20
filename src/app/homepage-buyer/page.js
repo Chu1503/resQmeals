@@ -74,7 +74,7 @@ const Homepage = () => {
       <div className="flex flex-wrap justify-center">
         {posts.map((post, index) => (
           <div key={index} className="flex items-center justify-center m-4">
-            <div className="flex flex-col items-center p-10 rounded-3xl sm:w-[15vw] sm:h-[25vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl">
+            <div className="flex flex-col items-center p-10 rounded-3xl sm:w-[20vw] sm:h-[30vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl relative">
               <h1 className="text-white text-3xl font-bold p-15">
                 {post.restaurant_name?.replace(/["0-9_]/g, "")}
               </h1>
@@ -85,6 +85,9 @@ const Homepage = () => {
               <h1 className="text-[#FFFFFF] text-1xl sm:text-1xl tracking-wide font-thin mt-1">
                 Quantity : {post.quantity}
               </h1>
+              <div className="absolute uppercase bottom-0 tracking-wide left-0 right-0 bg-[#F7D098] p-2 text-[#212121] text-xl font-bold text-center rounded-b-3xl">
+                Claim!
+              </div>
             </div>
           </div>
         ))}
