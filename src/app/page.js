@@ -4,6 +4,7 @@ import { auth } from "./firebase/config";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Homepage from "./homepage/page";
 import SelectPage from "@/components/select";
+import SellerRegister from "@/components/sellerRegister";
 import ParticlesComponent from "@/components/particles/particles";
 import "@/components//particles/particles.css";
 
@@ -34,7 +35,7 @@ export default function Home() {
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center">
       {user ? (
-        <SelectPage />
+        <SellerRegister />
       ) : (
         <>
           <ParticlesComponent id="particles" />
