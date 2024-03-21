@@ -16,14 +16,19 @@ const Homepage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(
-          "https://res-qmeals-backend.vercel.app/api/fetchRestaurants"
-        );
-        setPosts(response.data);
+        const response = await axios.get("https://res-qmeals-backend.vercel.app/api/fetchRestaurants");
+        const updatedPosts = response.data.map(post => {
+          return {
+            ...post,
+            claimedBy: post.claimer ? post.claimer.replace(/\d{13}/g, "").replace(/_/g, " ") : null
+          };
+        });
+        setPosts(updatedPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
+    
 
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -59,10 +64,41 @@ const Homepage = () => {
     setPosts([...posts, content]);
   };
 
-  const handleClaimClick = (index) => {
-    const updatedPosts = [...posts];
-    updatedPosts[index].claimedBy = user.displayName;
-    setPosts(updatedPosts);
+  const handleClaimClick = async (index) => {
+    try {
+      const userData = localStorage.getItem("userData");
+      const storedDataString = localStorage.getItem("buyerData");
+      const postDataString = localStorage.getItem("postData");
+
+      if (!userData) {
+        console.error("User data not found in local storage");
+        return;
+      }
+
+      // Parse storedDataString as JSON to remove quotes
+      const storedData = JSON.parse(storedDataString);
+      const postData = JSON.parse(postDataString);
+
+      // Remove quotes from userData
+      const cleanUserData = userData.replace(/['"]+/g, ""); // This removes both single and double quotes
+
+      const response = await axios.post(
+        "https://res-qmeals-backend.vercel.app/api/updateClaimer",
+        {
+          post_id: postData, // Assuming post_id is present in postData
+          claimer: cleanUserData, // Use cleanUserData without quotes
+          restaurant_id: storedData, // Use parsed JSON instead of string
+        }
+      );
+      console.log(response.data); // Log the response from the backend
+
+      // Update the claimedBy field of the specific post in the state
+      const updatedPosts = [...posts];
+      updatedPosts[index].claimedBy = cleanUserData; // Assuming userData contains the user ID without quotes
+      setPosts(updatedPosts);
+    } catch (error) {
+      console.error("Error updating claimer:", error);
+    }
   };
 
   return (
@@ -80,20 +116,22 @@ const Homepage = () => {
       <div className="flex flex-wrap justify-center">
         {posts.map((post, index) => (
           <div key={index} className="flex items-center justify-center m-4">
-            <div className="flex flex-col items-center sm:p-10 p-5 rounded-3xl sm:w-[20vw] sm:h-[30vh] w-[40vw] h-[15vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl relative">
+            <div className="flex flex-col items-center sm:p-10 p-5 rounded-3xl sm:w-[15vw] sm:h-[30vh] w-[40vw] h-[30vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl relative">
               <h1 className="text-white sm:text-3xl text-xl font-bold p-15">
                 {post.restaurant_name?.replace(/["0-9_]/g, "")}
               </h1>
 
               <h1 className="text-[#FFFFFF] text-md sm:text-xl font-thin mt-3">
-                Food : {post.food_type}
+                Food: {post.food_type}
               </h1>
               <h1 className="text-[#FFFFFF] text-md sm:text-xl font-thin">
-                Quantity : {post.quantity}
+                Quantity: {post.quantity}
               </h1>
-              <div className="absolute uppercase bottom-0 tracking-wide left-0 right-0 bg-[#F7D098] p-2 text-[#212121] text-xl font-bold text-center rounded-b-3xl">
+              <div className="absolute uppercase bottom-0 tracking-wide left-0 right-0 bg-[#F7D098] p-2 text-[#212121] text-md sm:text-xl font-bold text-center rounded-b-3xl">
                 {post.claimedBy ? (
-                  `Claimed by: ${post.claimedBy}`
+                  `Claimed by: ${post.claimedBy
+                    .replace(/\d{13}/g, "")
+                    .replace(/_/g, " ")}`
                 ) : (
                   <button onClick={() => handleClaimClick(index)}>
                     Claim!

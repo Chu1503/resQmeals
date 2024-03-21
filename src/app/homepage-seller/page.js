@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
     try {
       const storedDataString = localStorage.getItem("buyerData");
       if (storedDataString) {
-        const storedData = JSON.parse(storedDataString); // Parse the JSON string
+        const storedData = JSON.parse(storedDataString);
         const response = await axios.post(
           "https://res-qmeals-backend.vercel.app/api/postPost",
           {
@@ -26,11 +26,8 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
             status: false,
           }
         );
-        const responseData = response.data; // No need to parse since it's already JSON
-        const extractedRestaurantId = responseData.restaurant_id; // Extract restaurant ID
-        console.log("Response Data:", extractedRestaurantId); // Log the extracted restaurant ID
+        localStorage.setItem("postData", JSON.stringify(response.data));
       }
-      // Now you can pass the extracted restaurant ID to other functions or use it as needed
     } catch (error) {
       console.error("Error posting food information:", error);
     }
@@ -88,7 +85,15 @@ const Homepage = () => {
         const response = await axios.get(
           "https://res-qmeals-backend.vercel.app/api/fetchRestaurants"
         );
-        setPosts(response.data);
+        const updatedPosts = response.data.map((post) => {
+          return {
+            ...post,
+            claimedBy: post.claimer
+              ? post.claimer.replace(/\d{13}/g, "").replace(/_/g, " ")
+              : null,
+          };
+        });
+        setPosts(updatedPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -143,24 +148,29 @@ const Homepage = () => {
       <div className="flex flex-wrap justify-center">
         {posts.map((post, index) => (
           <div key={index} className="flex items-center justify-center m-4">
-            <div className="flex flex-col items-center sm:p-10 p-5 rounded-3xl sm:w-[20vw] sm:h-[30vh] w-[40vw] h-[25vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl relative">
+            <div className="flex flex-col items-center sm:p-10 p-5 rounded-3xl sm:w-[15vw] sm:h-[30vh] w-[40vw] h-[30vh] bg-[#333333] border border-solid border-[#F7D097] shadow-xl relative">
               <h1 className="text-white sm:text-3xl text-xl font-bold p-15">
                 {post.restaurant_name?.replace(/["0-9_]/g, "")}
               </h1>
-
               <h1 className="text-[#FFFFFF] text-md sm:text-xl font-thin mt-3">
-                Food : {post.food_type}
+                Food: {post.food_type}
               </h1>
               <h1 className="text-[#FFFFFF] text-md sm:text-xl font-thin">
-                Quantity : {post.quantity}
+                Quantity: {post.quantity}
               </h1>
+              {post.claimer && (
+                <div className="absolute uppercase bottom-0 tracking-wide left-0 right-0 bg-[#F7D098] p-2 text-[#212121] text-md sm:text-xl font-bold text-center rounded-b-3xl">
+                  Claimed by:{" "}
+                  {post.claimedBy.replace(/\d{13}/g, "").replace(/_/g, " ")}
+                </div>
+              )}
             </div>
           </div>
         ))}
       </div>
 
       <button
-        className="bg-[#F7D098] hover:bg-white text-[#212121] font-bold text-md rounded-md p-3 absolute bottom-[10vh]"
+        className="bg-[#F7D098] hover:bg-white text-[#212121] font-bold text-md rounded-md p-3 absolute sm:bottom-[10vh] bottom-[2.5vh]"
         onClick={handleModalOpen}
       >
         CREATE POST
