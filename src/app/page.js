@@ -33,9 +33,11 @@ export default function Home() {
     }
   };
 
+  const isDesktop = window.innerWidth >= 768;
+
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
-      {loading ? ( // Display loading text while awaiting authentication
+    <div className="h-screen w-screen flex flex-col justify-center items-center bg-[#F7D098] sm:bg-transparent">
+      {loading ? (
         <p className="text-[#333333] text-3xl sm:text-5xl font-bold p-5 tracking-widest">
           Loading...
         </p>
@@ -43,18 +45,18 @@ export default function Home() {
         <SelectPage />
       ) : (
         <>
-          <ParticlesComponent id="particles" />
+          {isDesktop && <ParticlesComponent id="particles" />}{" "}
           <div className="flex flex-col h-[50vh] w-[50vh] p-10 bg-[#212121] rounded-full align-middle text-center justify-center shadow-lg hover:shadow-xl">
             <div>
-            <h1 className="text-[#F7D098] text-3xl sm:text-5xl font-bold p-5 tracking-wide">
-              resQmeals
-            </h1>
-            <button
-              onClick={signInWithGoogle}
-              className="border-[2px] w-auto rounded-full p-3 font-black tracking-[5px] text-[#333333] border-[#333333] bg-[#F7D098]"
-            >
-              SIGN IN
-            </button>
+              <h1 className="text-[#F7D098] text-3xl sm:text-5xl font-bold p-5 tracking-wide">
+                resQmeals
+              </h1>
+              <button
+                onClick={signInWithGoogle}
+                className="border-[2px] w-auto rounded-full p-3 font-black tracking-[5px] text-[#333333] border-[#333333] bg-[#F7D098]"
+              >
+                SIGN IN
+              </button>
             </div>
           </div>
         </>

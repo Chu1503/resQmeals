@@ -59,6 +59,12 @@ const Homepage = () => {
     setPosts([...posts, content]);
   };
 
+  const handleClaimClick = (index) => {
+    const updatedPosts = [...posts];
+    updatedPosts[index].claimedBy = user.displayName;
+    setPosts(updatedPosts);
+  };
+
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#212121]">
       <div className="absolute top-0 w-screen h-[10vh] flex flex-row items-center justify-around bg-black">
@@ -86,7 +92,13 @@ const Homepage = () => {
                 Quantity : {post.quantity}
               </h1>
               <div className="absolute uppercase bottom-0 tracking-wide left-0 right-0 bg-[#F7D098] p-2 text-[#212121] text-xl font-bold text-center rounded-b-3xl">
-                Claim!
+                {post.claimedBy ? (
+                  `Claimed by: ${post.claimedBy}`
+                ) : (
+                  <button onClick={() => handleClaimClick(index)}>
+                    Claim!
+                  </button>
+                )}
               </div>
             </div>
           </div>

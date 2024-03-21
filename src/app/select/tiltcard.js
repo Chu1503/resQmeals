@@ -42,7 +42,7 @@ const TiltCard = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="flex flex-col sm:flex-row justify-center items-center sm:gap-[10rem] gap-[5rem]">
       <motion.div
         ref={ref}
         onMouseMove={handleMouseMove}
@@ -51,22 +51,24 @@ const TiltCard = () => {
         style={{
           transform: "translateZ(500px)",
           transformStyle: "preserve-3d",
-          boxShadow: "0 0 20px rgba(255, 255, 255, 1)", // Adding glow effect
+          boxShadow: "0 0 20px rgba(0, 0, 0, 1)",
           backgroundColor: "rgb(33, 33, 33)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginRight: "100px",
+          cursor: "pointer",
         }}
         animate={{
           rotateX,
           rotateY,
         }}
-        className="relative h-[50vh] w-[50vh] rounded-xl flex flex-row items-center"
+        className="relative h-[30vh] w-[30vh] sm:h-[50vh] sm:w-[50vh] rounded-xl flex sm:flex-row flex-col items-center"
       >
         <div className="flex flex-col items-center gap-5">
-          <FaShop size={180} color="#D9D9D9" />
-          <h1 className="text-3xl font-light text-[#D9D9D9]">Seller</h1>
+          <FaShop size={100} color="#F7D098" />
+          <h1 className="sm:text-4xl text-xl font-bold text-[#F7D098]">
+            SELLER
+          </h1>
         </div>
       </motion.div>
       <motion.div
@@ -74,21 +76,24 @@ const TiltCard = () => {
         style={{
           transform: "translateZ(500px)",
           transformStyle: "preserve-3d",
-          boxShadow: "0 0 20px rgba(255, 255, 255, 1)", // Adding glow effect
+          boxShadow: "0 0 20px rgba(0, 0, 0, 1)",
           backgroundColor: "rgb(33, 33, 33)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          cursor: "pointer",
         }}
         animate={{
           rotateX,
           rotateY,
         }}
-        className="relative h-[50vh] w-[50vh] rounded-xl flex flex-row items-center"
+        className="relative h-[30vh] w-[30vh] sm:h-[50vh] sm:w-[50vh] rounded-xl flex sm:flex-row flex-col items-center"
       >
         <div className="flex flex-col items-center gap-5">
-          <FaCartShopping size={180} color="#D9D9D9" />
-          <h1 className="text-3xl font-light text-[#D9D9D9]">Buyer</h1>
+          <FaCartShopping size={100} color="#F7D098" />
+          <h1 className="sm:text-4xl text-xl font-bold text-[#F7D098]">
+            BUYER
+          </h1>
         </div>
       </motion.div>
     </div>

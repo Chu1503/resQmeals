@@ -24,6 +24,7 @@ const BuyerRegister = () => {
       );
       console.log(response.data);
 
+      localStorage.setItem("userData", JSON.stringify(response.data));
       router.push("/homepage-buyer");
     } catch (error) {
       console.error("Error posting buyer information:", error);
