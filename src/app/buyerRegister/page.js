@@ -8,7 +8,7 @@ const BuyerRegister = () => {
   const [buyer_name, setBuyerName] = useState("");
   const [buyer_contact_number, setBuyerContactNumber] = useState("");
   const [buyer_address, setBuyerAddress] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleRegister = async () => {
@@ -28,19 +28,22 @@ const BuyerRegister = () => {
       router.push("/homepage-buyer");
     } catch (error) {
       console.error("Error posting buyer information:", error);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
 
   const handleSubmit = () => {
-    if (buyer_name.trim() !== '' && buyer_contact_number.trim() !== '' && buyer_address.trim() !== '') {
+    if (
+      buyer_name.trim() !== "" &&
+      buyer_contact_number.trim() !== "" &&
+      buyer_address.trim() !== ""
+    ) {
       handleRegister();
     } else {
-      alert('Please fill in all fields.');
+      alert("Please fill in all fields.");
     }
   };
-  
 
   return (
     <>
@@ -48,37 +51,34 @@ const BuyerRegister = () => {
         <div className="relative overflow-x-hidden overflow-y-hidden w-screen h-screen align-center items-center">
           <Marquee
             speed={50}
-            delay={1}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#FFFFFF]">
               BUYER.
             </h1>
           </Marquee>
           <Marquee
             speed={130}
-            delay={0.3}
             direction="right"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#212121]">
               BUYER.
             </h1>
           </Marquee>
           <Marquee
             speed={70}
-            delay={2}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#FFFFFF]">
               BUYER.
             </h1>
           </Marquee>
@@ -86,34 +86,32 @@ const BuyerRegister = () => {
             speed={90}
             direction="right"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#212121]">
               BUYER.
             </h1>
           </Marquee>
           <Marquee
             speed={100}
-            delay={0.7}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#FFFFFF]">
               BUYER.
             </h1>
           </Marquee>
           <Marquee
             speed={20}
-            delay={0.1}
             direction="right"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#212121]">
               BUYER.
             </h1>
           </Marquee>
@@ -121,10 +119,43 @@ const BuyerRegister = () => {
             speed={150}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold text-8xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#FFFFFF]">
+              BUYER.
+            </h1>
+          </Marquee>
+          <Marquee
+            speed={150}
+            direction="left"
+            autoFill
+               
+            className="z-0"
+          >
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#212121]">
+              BUYER.
+            </h1>
+          </Marquee>
+          <Marquee
+            speed={150}
+            direction="left"
+            autoFill
+               
+            className="z-0"
+          >
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#FFFFFF]">
+              BUYER.
+            </h1>
+          </Marquee>
+          <Marquee
+            speed={150}
+            direction="left"
+            autoFill
+               
+            className="z-0"
+          >
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl   text-[#212121]">
               BUYER.
             </h1>
           </Marquee>
@@ -144,7 +175,7 @@ const BuyerRegister = () => {
           <input
             type="text"
             placeholder="Contact Number"
-            value={buyer_contact_number} 
+            value={buyer_contact_number}
             onChange={(e) => {
               const input = e.target.value;
               const numericInput = input.replace(/\D/g, "");
@@ -165,12 +196,12 @@ const BuyerRegister = () => {
           {loading ? (
             <p className="mt-4 font-black text-white">Loading...</p>
           ) : (
-          <button
-            onClick={handleSubmit}
-            className="w-auto mt-4 p-4 rounded-xl font-black bg-[#F7D098] text-[#212121] hover:bg-white"
-          >
-            Submit
-          </button>
+            <button
+              onClick={handleSubmit}
+              className="w-auto mt-4 p-4 rounded-xl font-black bg-[#F7D098] text-[#212121] hover:bg-white"
+            >
+              Submit
+            </button>
           )}
         </div>
       </div>
