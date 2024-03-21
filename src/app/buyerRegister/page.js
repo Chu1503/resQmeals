@@ -39,6 +39,8 @@ const BuyerRegister = () => {
       buyer_contact_number.trim() !== "" &&
       buyer_address.trim() !== ""
     ) {
+      localStorage.setItem("buyerAddress", buyer_address);
+
       handleRegister();
     } else {
       alert("Please fill in all fields.");

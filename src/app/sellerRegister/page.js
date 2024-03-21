@@ -8,7 +8,7 @@ const SellerRegister = () => {
   const [name, setName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleRegister = async () => {
@@ -24,10 +24,10 @@ const SellerRegister = () => {
       );
       console.log(response.data);
 
-      localStorage.setItem("buyerData", JSON.stringify(response.data));
+      localStorage.setItem("sellerData", JSON.stringify(response.data));
       router.push("/homepage-seller");
     } catch (error) {
-      console.error("Error posting buyer information:", error);
+      console.error("Error posting seller information:", error);
     } finally {
       setLoading(false);
     }
@@ -39,6 +39,8 @@ const SellerRegister = () => {
       contactNumber.trim() !== "" &&
       address.trim() !== ""
     ) {
+      localStorage.setItem("sellerAddress", address);
+
       handleRegister();
     } else {
       alert("Please fill in all fields.");
@@ -49,112 +51,52 @@ const SellerRegister = () => {
     <>
       <div className="h-screen w-screen bg-[#F7D098] flex justify-center items-center">
         <div className="relative overflow-x-hidden overflow-y-hidden w-screen h-screen align-center items-center">
-          <Marquee
-            speed={50}
-            direction="left"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={50} direction="left" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={130}
-            direction="right"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={130} direction="right" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={70}
-            direction="left"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={70} direction="left" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={90}
-            direction="right"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={90} direction="right" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={100}
-            direction="left"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={100} direction="left" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={20}
-            direction="right"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={20} direction="right" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={150}
-            direction="left"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={150} direction="left" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={150}
-            direction="left"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={150} direction="left" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={150}
-            direction="left"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={150} direction="left" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
-          <Marquee
-            speed={150}
-            direction="left"
-            autoFill
-               
-            className="z-0"
-          >
+          <Marquee speed={150} direction="left" autoFill className="z-0">
             <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>

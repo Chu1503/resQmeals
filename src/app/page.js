@@ -45,7 +45,7 @@ export default function Home() {
       ) : (
         <>
           <ParticlesComponent id="particles" />
-          <div className="flex flex-col h-[50vh] w-[50vh] p-10 bg-[#212121] rounded-full align-middle text-center justify-center shadow-lg hover:shadow-xl">
+          <div className="flex flex-col h-[40vh] w-[40vh] p-10 bg-[#212121] rounded-full align-middle text-center justify-center shadow-lg hover:shadow-xl">
             <div>
               <h1 className="text-[#F7D098] text-3xl sm:text-5xl font-bold p-5 tracking-wide">
                 resQmeals
