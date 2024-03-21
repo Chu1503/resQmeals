@@ -51,37 +51,34 @@ const SellerRegister = () => {
         <div className="relative overflow-x-hidden overflow-y-hidden w-screen h-screen align-center items-center">
           <Marquee
             speed={50}
-            delay={1}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
           <Marquee
             speed={130}
-            delay={0.3}
             direction="right"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
           <Marquee
             speed={70}
-            delay={2}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
@@ -89,34 +86,32 @@ const SellerRegister = () => {
             speed={90}
             direction="right"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
           <Marquee
             speed={100}
-            delay={0.7}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
           <Marquee
             speed={20}
-            delay={0.1}
             direction="right"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
@@ -124,10 +119,10 @@ const SellerRegister = () => {
             speed={150}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
@@ -135,10 +130,10 @@ const SellerRegister = () => {
             speed={150}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>
@@ -146,10 +141,10 @@ const SellerRegister = () => {
             speed={150}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#212121]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#212121]">
               SELLER.
             </h1>
           </Marquee>
@@ -157,10 +152,10 @@ const SellerRegister = () => {
             speed={150}
             direction="left"
             autoFill
-            pauseOnClick
+               
             className="z-0"
           >
-            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl cursor-pointer text-[#FFFFFF]">
+            <h1 className="m-1 rounded-xl flex space-x-5 p-4 font-bold sm:text-8xl text-4xl    text-[#FFFFFF]">
               SELLER.
             </h1>
           </Marquee>

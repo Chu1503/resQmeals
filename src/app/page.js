@@ -33,7 +33,6 @@ export default function Home() {
     }
   };
 
-  const isDesktop = window.innerWidth >= 768;
 
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center bg-[#F7D098] sm:bg-transparent">
@@ -45,7 +44,7 @@ export default function Home() {
         <SelectPage />
       ) : (
         <>
-          {isDesktop && <ParticlesComponent id="particles" />}{" "}
+          <ParticlesComponent id="particles" />
           <div className="flex flex-col h-[50vh] w-[50vh] p-10 bg-[#212121] rounded-full align-middle text-center justify-center shadow-lg hover:shadow-xl">
             <div>
               <h1 className="text-[#F7D098] text-3xl sm:text-5xl font-bold p-5 tracking-wide">
